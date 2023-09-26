@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB</title>
+<style>
+    body {
+        font-family: Thonburi, Leelawadee, sans-serif;
+        font-size: larger;
+    }
+    table, td, th {
+        border-width: 1px;
+        border-style: solid;
+        border-collapse: collapse;
+    }
+    th {
+        background-color: cornflowerblue;
+        color: white;
+    }
+</style>
+</head>
+<body>
+    {% if messages %}
+        {% for message in messages %}
+        <p style="color: red;"><strong>{{message}}</strong>
+        {% endfor %}
+    {% endif %}
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price (Baht)</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for product in all_products %}
+            <tr>
+                <td>{{ product.id }}</td>
+                <td>{{ product.name }}</td>
+                <td>{{ product.price|floatformat }}</td>
+                <td><button type="button" onclick="location.href='/update/{{product.id}}'">Update</button></td>
+                <td><button type="button" onclick="if(confirm('Are you sure ?')) window.location.href='/delete/{{product.id}}'">Delete</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p><a href="/add">[ Add Data ]</a><a href="/">[ Back to Home ]</a>
+</body>
+</html>
